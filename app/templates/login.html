@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Вход в систему</title>
+</head>
+<body>
+    <h1>Вход в систему</h1>
+    
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="alert alert-{{ category }}">{{ message }}</div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+    
+    <form method="POST">
+        {{ form.hidden_tag() }}
+        <div>
+            {{ form.username.label }}
+            {{ form.username(size=32) }}
+            {% if form.username.errors %}
+                <span style="color: red;">{{ form.username.errors[0] }}</span>
+            {% endif %}
+        </div>
+        <div>
+            {{ form.password.label }}
+            {{ form.password(size=32) }}
+            {% if form.password.errors %}
+                <span style="color: red;">{{ form.password.errors[0] }}</span>
+            {% endif %}
+        </div>
+        <div>
+            {{ form.submit() }}
+        </div>
+    </form>
+</body>
+</html>
